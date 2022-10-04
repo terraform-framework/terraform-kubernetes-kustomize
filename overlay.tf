@@ -58,7 +58,9 @@ data "kustomization_overlay" "this" {
   }, var.common_labels)
 
   // Lsit of resource manifests
-  resources = var.resources
+  resources = concat([
+    format("%s/manifests", path.module),
+  ], var.resources)
 
   // List of component manifests
   components = var.components

@@ -1,0 +1,12 @@
+namePreifx:
+  - kind: Application
+    group: argoproj.io
+    version: v1alpha1
+    path: spec/source/kustomize/namePrefix
+    create: true
+nameSuffix:
+  - kind: Application
+    group: argoproj.io
+    version: v1alpha1
+    path: spec/source/kustomize/nameSuffix
+    create: true

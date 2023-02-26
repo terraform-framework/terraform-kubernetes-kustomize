@@ -108,7 +108,7 @@ variable "helm_charts" {
     include_crds  = optional(bool, true)
     values_file   = optional(string)
     values_inline = optional(map(any), null)
-    values_merge  = optional(string, "merge")
+    values_merge  = optional(string)
   }))
 
   default = []

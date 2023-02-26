@@ -58,9 +58,7 @@ data "kustomization_overlay" "this" {
   }, var.common_labels)
 
   // Lsit of resource manifests
-  resources = concat([
-    format("%s/manifests", path.module),
-  ], var.resources)
+  resources = var.resources
 
   // List of component manifests
   components = var.components
@@ -81,6 +79,22 @@ data "kustomization_overlay" "this" {
     content {
       name  = replicas.key
       count = replicas.value
+    }
+  }
+
+  dynamic "helm_charts" {
+    for_each = var.helm_charts
+
+    content {
+      name          = helm_charts.value.name
+      version       = helm_charts.value.version
+      repo          = helm_charts.value.repo
+      release_name  = helm_charts.value.release_name
+      namespace     = helm_charts.value.namespace
+      include_crds  = helm_charts.value.include_crds
+      values_file   = helm_charts.value.values_file
+      values_inline = yamlencode(helm_charts.value.values_inline)
+      values_merge  = helm_charts.value.values_merge
     }
   }
 }

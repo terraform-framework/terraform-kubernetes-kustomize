@@ -95,5 +95,21 @@ variable "transformers" {
 
 variable "helm_path" {
   type    = string
-  default = null
+  default = "helm"
+}
+
+variable "helm_charts" {
+  type = list(object({
+    name          = string
+    version       = string
+    repo          = string
+    release_name  = optional(string)
+    namespace     = optional(string)
+    include_crds  = optional(bool, true)
+    values_file   = optional(string)
+    values_inline = optional(map(any), null)
+    values_merge  = optional(string, "merge")
+  }))
+
+  default = []
 }

@@ -1,5 +1,5 @@
 module "overlay" {
-  source = "./overlay"
+  source = "./modules/overlay"
 
   account                     = var.account
   load_restrictor             = var.load_restrictor
@@ -21,7 +21,7 @@ module "overlay" {
 }
 
 module "resources" {
-  source = "./consolidator"
+  source = "./modules/consolidator"
 
   overlays = [
     module.overlay,

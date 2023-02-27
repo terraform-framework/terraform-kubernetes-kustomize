@@ -107,8 +107,8 @@ variable "helm_charts" {
     namespace     = optional(string)
     include_crds  = optional(bool, true)
     values_file   = optional(string)
-    values_inline = optional(map(any), null)
-    values_merge  = optional(string, "merge")
+    values_inline = optional(string)
+    values_merge  = optional(string)
   }))
 
   default = []

@@ -113,3 +113,30 @@ variable "helm_charts" {
 
   default = []
 }
+
+variable "patches" {
+  type = list(object({
+    path  = optional(string)
+    patch = optional(string)
+
+    target = object({
+      group               = optional(string)
+      version             = optional(string)
+      kind                = optional(string)
+      name                = optional(string)
+      namespace           = optional(string)
+      label_selector      = optional(string)
+      annotation_selector = optional(string)
+    })
+
+    options = optional(object({
+      allow_kind_change = optional(bool, false)
+      allow_name_change = optional(bool, false)
+      }), {
+      allow_kind_change = false
+      allow_name_change = false
+    })
+  }))
+
+  default = []
+}

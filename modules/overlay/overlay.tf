@@ -93,8 +93,32 @@ data "kustomization_overlay" "this" {
       namespace     = helm_charts.value.namespace
       include_crds  = helm_charts.value.include_crds
       values_file   = helm_charts.value.values_file
-      values_inline = yamlencode(helm_charts.value.values_inline)
+      values_inline = helm_charts.value.values_inline
       values_merge  = helm_charts.value.values_merge
+    }
+  }
+
+  dynamic "patches" {
+    for_each = var.patches
+
+    content {
+      path  = patches.value.path
+      patch = patches.value.patch
+
+      target {
+        group               = patches.value.target.group
+        version             = patches.value.target.version
+        kind                = patches.value.target.kind
+        name                = patches.value.target.name
+        namespace           = patches.value.target.namespace
+        label_selector      = patches.value.target.label_selector
+        annotation_selector = patches.value.target.annotation_selector
+      }
+
+      options {
+        allow_kind_change = patches.value.options.allow_kind_change
+        allow_name_change = patches.value.options.allow_name_change
+      }
     }
   }
 }

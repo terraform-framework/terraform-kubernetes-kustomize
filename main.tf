@@ -18,6 +18,7 @@ module "overlay" {
   transformers                = var.transformers
   helm_path                   = var.helm_path
   helm_charts                 = var.helm_charts
+  patches                     = var.patches
 }
 
 module "resources" {

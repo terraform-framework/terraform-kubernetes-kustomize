@@ -4,3 +4,9 @@ variable "overlays" {
     manifests = map(string)
   }))
 }
+
+variable "wait" {
+  type        = bool
+  default     = null
+  description = "Whether to wait for pods to become ready"
+}

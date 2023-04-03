@@ -27,4 +27,6 @@ module "resources" {
   overlays = [
     module.overlay,
   ]
+
+  wait = var.wait
 }

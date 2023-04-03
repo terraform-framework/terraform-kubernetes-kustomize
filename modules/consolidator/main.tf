@@ -7,6 +7,8 @@ resource "kustomization_resource" "p1" {
     ? sensitive(local.manifests[each.value])
     : local.manifests[each.value]
   )
+
+  wait = var.wait
 }
 
 // Applies all resources not handled by `p1` and `p3`
@@ -18,6 +20,8 @@ resource "kustomization_resource" "p2" {
     ? sensitive(local.manifests[each.value])
     : local.manifests[each.value]
   )
+
+  wait = var.wait
 
   depends_on = [
     kustomization_resource.p1,
@@ -33,6 +37,8 @@ resource "kustomization_resource" "p3" {
     ? sensitive(local.manifests[each.value])
     : local.manifests[each.value]
   )
+
+  wait = var.wait
 
   depends_on = [
     kustomization_resource.p2,
